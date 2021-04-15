@@ -7,8 +7,8 @@ class App extends Component {
   state = {
     persons: [
       { id: 'asdf1', name: 'Itish', age: 23, job: 'Unemployed' },
-      { id: 'qwer2', name: 'Mridul', age: 30, job: 'Engineering Manager' },
-      { id:'zxcv3', name: 'Ishani', age: 29, job: 'Program Manager' },
+      { id: 'qwer2', name: 'Mridul', age: 30, job: 'working at Noon Academy' },
+      { id:'zxcv3', name: 'Ishani', age: 29, job: 'working at Atlassian' },
     ],
     otherState: 'Some other value',
     showPerson: false,
@@ -43,9 +43,10 @@ class App extends Component {
 
   render() {
     const btnStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
-      border: '1px solid blue',
+      border: '1px solid',
       padding: '8px',
       cursor: 'pointer'
     }
@@ -62,27 +63,29 @@ class App extends Component {
           key = {person.id} 
           change = {(event) => this.nameChangedHandler(event, person.id)} />
         })}
-        {/* <Person 
-           name = { this.state.persons[0].name } 
-           click = { this.switchNameHandler.bind(this, 'Itish Dhiman')}
-           age = { this.state.persons[0].age } job="unemployed"/>
-        <Person 
-           name = { this.state.persons[1].name } 
-           change = {this.nameChangedHandler}
-           age = { this.state.persons[1].age } job="Engineering Manager"/>
-        <Person 
-           name = { this.state.persons[2].name } 
-           age = { this.state.persons[2].age } job="Program Manager"/> */}
       </div>
-      )
+      );
+      btnStyle.backgroundColor = 'red'
     }
+
+    const classes = [];
+    let displayText = "Okay maybe i'm getting it..."
+    if(this.state.persons.length <= 2) {
+      classes.push('red');
+      displayText = 'Hold up...'
+    }
+    if(this.state.persons.length <= 1) {
+      classes.push('bold');
+      displayText = 'Wtf did you do 😥';
+    }
+   
     return (
       // This looks like HTML, but it is NOT. This is JavaScript behind the scenes. 
       
       <div className="App">
        <h1>Hi, I'm a React App</h1>
        <h2>This is very confusing so far 🤔 </h2>
-       <p>Okay maybe i'm getting it...</p>
+       <p className = {classes.join(' ')}>{displayText}</p>
        <button 
        style={btnStyle}
        onClick = { this.togglePersonsHandler }>Toggle Names</button>
@@ -95,8 +98,6 @@ class App extends Component {
 
 
 export default App;
-
-
 
 
 
