@@ -1,7 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
+import styled from 'styled-components';
 import Person from './Person/Person.js'
 
+const StyledButton = styled.button`
+      background-color: ${props => props.alt ? 'red' : 'green'};
+      color: white;
+      font: inherit;
+      border: 1px solid;
+      padding: 8px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+        color: black;
+      }
+`
 
 class App extends Component {
   state = {
@@ -48,7 +62,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
     }
     let persons = null;
     if(this.state.showPerson) {
@@ -65,7 +79,7 @@ class App extends Component {
         })}
       </div>
       );
-      btnStyle.backgroundColor = 'red'
+      btnStyle.backgroundColor = 'red';
     }
 
     const classes = [];
@@ -86,9 +100,7 @@ class App extends Component {
        <h1>Hi, I'm a React App</h1>
        <h2>This is very confusing so far 🤔 </h2>
        <p className = {classes.join(' ')}>{displayText}</p>
-       <button 
-       style={btnStyle}
-       onClick = { this.togglePersonsHandler }>Toggle Names</button>
+       <StyledButton alt = {this.state.showPerson ? 1 : 0} onClick = { this.togglePersonsHandler }>Toggle Names</StyledButton> 
        {persons}
       </div>
     );
@@ -98,7 +110,6 @@ class App extends Component {
 
 
 export default App;
-
 
 
 
